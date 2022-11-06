@@ -1,4 +1,4 @@
-i#include "sort.h"
+#include "sort.h"
 
 /**
  * selection_sort - sorts an array of integers in ascending order
@@ -9,24 +9,31 @@ i#include "sort.h"
  */
 void selection_sort(int *array, size_t size)
 {
-	int tmp;
-	size_t i, j, m;
+	size_t b, i, k;
+	int search, temp, swapped = 0;
 
-	for (i = 0; i < size; i++)
+	i = b = 0;
+	while (i < (size - 1))
 	{
-		m = i;
-		for (j = i + 1; j < size; j++)
+		b = i + 1;
+		search = temp = array[i];
+		while (b < size)
 		{
-			if (array[m] > array[j])
-				m = j;
+			if (search > array[b])
+			{
+				search = array[b];
+				swapped = 1;
+				k = b;
+			}
+			b++;
 		}
-
-		if (i != m)
+		if (swapped)
 		{
-			tmp = array[i];
-			array[i] = array[m];
-			array[m] = tmp;
+			array[i] = search;
+			array[k] = temp;
 			print_array(array, size);
+			swapped = 0;
 		}
+		i++;
 	}
 }
