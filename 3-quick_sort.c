@@ -23,7 +23,7 @@ void quick_sort(int *array, size_t size)
  */
 void qksort_pro(int *arr, size_t start, size_t size, size_t S)
 {
-	size_t j, p = size - 1, i = start, I = start;
+	size_t j, p = size - 1, i = start;
 	int large, temp, found = 0;
 
 	if (sorted(arr, size))
