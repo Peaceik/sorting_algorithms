@@ -9,49 +9,88 @@
  */
 void quick_sort(int *array, size_t size)
 {
-	_qksort(array, 0, size - 1, size);
+	qksort_pro(array, 0, size, size);
 }
 
 /**
- * _qksort - auxiliary function
- * @a: array
- * @low: first element
- * @high: last element
- * @size: size of array
+ * qksort_pro - auxiliary function
+ * @arr: array
+ * @start: first element
+ * @size: last endpoint
+ * @S: size of array
  *
  * Return: void
  */
-void qksort(int *a, int low, int high, int size)
+void qksort_pro(int *arr, size_t start, size_t size, size_t S)
 {
-	int p, w, i;
-	int tmp;
+	size_t j, p = size - 1, i = start, I = start;
+	int large, temp, found = 0;
 
-	if (low < high)
+	if (sorted(arr, size))
+		return;
+	while (i < p)
 	{
-		p = high;
-		w = low;
-		for (i = low; i < high; i++)
+		if (arr[i] > arr[p])
 		{
-			if (a[i] < a[p])
+			large = arr[i];
+			j = i + 1;
+			while (j <= p)
 			{
-				if (i != w)
+				if (arr[j] < arr[p])
 				{
-					tmp = a[i];
-					a[i] = a[w];
-					a[w] = tmp;
-					print_array(a, size);
+					arr[i] = arr[j];
+					arr[j] = large;
+					found = 1;
+					print_array(arr, S);
+					break;
 				}
-				w++;
+				else
+					found = 0;
+				j++;
 			}
+			if (!found)
+				break;
 		}
-		if (w != p && a[w] != a[p])
-		{
-			tmp = a[w];
-			a[w] = a[p];
-			a[p] = tmp;
-			print_array(a, size);
-		}
-		_qksort(a, low, w - 1, size);
-		_qksort(a, w + 1, high, size);
+		i++;
 	}
+	if (!found && arr[p] != arr[i])
+	{
+		temp = arr[p];
+		arr[p] = large;
+		arr[i] = temp;
+		found = 0;
+		print_array(arr, S);
+	}
+
+	if (i == (size - 1))
+		qksort_pro(arr, 0, (size - 1), S);
+	else if(!i)
+		qksort_pro(arr, 0, size, S);
+	else
+	{
+		qksort_pro(arr, 0, i, S);
+		qksort_pro(arr, (i + 1), size, S);
+	}
+}
+
+/**
+ * sorted - checks if an array or segment of an array is sorted
+ * @size - size of the array
+ * Returns: 1 if true, else 0
+ */
+int sorted(int *array, size_t size)
+{
+	size_t i = 0;
+
+	while (i < (size - 1))
+	{
+		if (array[i] > array[i + 1])
+			return 0;
+		else
+		{
+			i++;
+			continue;
+		}
+	}
+	return 1;
 }
