@@ -18,23 +18,6 @@ void bubble_sort(int *array, size_t size)
 		return;
 	while (1)
 	{
-		while (c < (size - 1))
-                {
-                        if (array[c] < array[c + 1])
-                        {
-                                c++;
-                                continue;
-                        }
-                        else
-                        {
-                                i = c = 0;
-                                b = 1;
-                                break;
-                        }
-                        c++;
-                }
-                if (c == (size - 1))
-                        break;
 		while (b < size)
 		{
 			if (array[i] > array[b])
@@ -47,10 +30,9 @@ void bubble_sort(int *array, size_t size)
 			i = b;
 			b++;
 		}
-		/*
 		while (c < (size - 1))
 		{
-			if (array[c] < array[c + 1])
+			if (array[c] <= array[c + 1])
 			{
 				c++;
 				continue;
@@ -64,6 +46,6 @@ void bubble_sort(int *array, size_t size)
 			c++;
 		}
 		if (c == (size - 1))
-			break;*/
+			break;
 	}
 }
