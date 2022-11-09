@@ -9,6 +9,8 @@
  */
 void quick_sort(int *array, size_t size)
 {
+	if (!array)
+		return;
 	qksort_pro(array, 0, size, size);
 }
 
@@ -32,16 +34,13 @@ void qksort_pro(int *arr, size_t start, size_t size, size_t S)
 	{
 		if (arr[i] > arr[p])
 		{
-			large = arr[i];
-			j = i + 1;
+			large = arr[i], j = i + 1;
 			while (j <= p)
 			{
 				if (arr[j] < arr[p])
 				{
-					arr[i] = arr[j];
-					arr[j] = large;
-					found = 1;
-					print_array(arr, S);
+					arr[i] = arr[j], arr[j] = large;
+					found = 1, print_array(arr, S);
 					break;
 				}
 				else
@@ -55,21 +54,16 @@ void qksort_pro(int *arr, size_t start, size_t size, size_t S)
 	}
 	if (!found && arr[p] != arr[i])
 	{
-		temp = arr[p];
-		arr[p] = large;
-		arr[i] = temp;
-		found = 0;
-		print_array(arr, S);
+		temp = arr[p], arr[p] = large, arr[i] = temp;
+		found = 0, print_array(arr, S);
 	}
-
 	if (i == (size - 1))
 		qksort_pro(arr, 0, (size - 1), S);
 	else if(!i)
 		qksort_pro(arr, 0, size, S);
 	else
 	{
-		qksort_pro(arr, 0, i, S);
-		qksort_pro(arr, (i + 1), size, S);
+		qksort_pro(arr, 0, i, S), qksort_pro(arr, (i + 1), size, S);
 	}
 }
 
@@ -77,7 +71,8 @@ void qksort_pro(int *arr, size_t start, size_t size, size_t S)
  * sorted - checks if an array or segment of an array is sorted
  * @array: array to be checked
  * @size: size of the array
- * Returns: 1 if true, else 0
+ *
+ * Return: 1 if true, else 0
  */
 int sorted(int *array, size_t size)
 {
