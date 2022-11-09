@@ -81,12 +81,8 @@ int sorted(int *array, size_t size)
 	while (i < (size - 1))
 	{
 		if (array[i] > array[i + 1])
-			return 0;
-		else
-		{
-			i++;
-			continue;
-		}
+			return (0);
+		i++;
 	}
-	return 1;
+	return (1);
 }
