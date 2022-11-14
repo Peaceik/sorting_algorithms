@@ -59,7 +59,7 @@ void qksort_pro(int *arr, size_t start, size_t size, size_t S)
 	}
 	if (i == (size - 1))
 		qksort_pro(arr, 0, (size - 1), S);
-	else if(!i)
+	else if (!i)
 		qksort_pro(arr, 0, size, S);
 	else
 	{
